@@ -1,5 +1,7 @@
 # DiPlay
 
+> **关于本仓库（AAtoAndroid-display）：** 这是 [DiPlay](https://github.com/shihabal3amri/DiPlay) 的快照，增加了实验性的无线 Android Auto 接收功能，让已配对的安卓手机通过蓝牙和 Wi-Fi 投射到车机。由 [@saz-io](https://github.com/saz-io) 维护。该功能默认关闭，**尚未在真实手机或车辆上测试**，并且需要自行提供车机身份文件。详见 [Android Auto 说明（英文）](docs/ANDROID_AUTO.md)。以下内容描述的是 DiPlay 本身。
+
 为兼容的比亚迪安卓车机提供有线及无线 CarPlay，采用 DiAuto 风格界面。
 
 > 这些项目专注于比亚迪汽车。它们可能在其他品牌上运行，但其他品牌不在支持范围内，也没有增加支持或修复其品牌特定兼容性问题的计划。

@@ -1,14 +1,30 @@
-# DiPlay
+# AAtoAndroid-display
 
-**CarPlay for compatible BYD Android head units.** Wired and wireless, with the familiar DiAuto interface. Independent app: `com.shihab.diplay`.
+**DiPlay plus an experimental wireless Android Auto receiver.** A paired Android phone can project Android Auto to an Android head unit over Bluetooth and Wi-Fi, next to DiPlay's existing wireless CarPlay. Maintained by [@saz-io](https://github.com/saz-io).
 
-> **BYD support scope:** These projects focus on BYD cars. They may work on other brands, but other brands are unsupported and there are no plans to add support or fix brand-specific incompatibilities.
+This repository is a snapshot of [DiPlay](https://github.com/shihabal3amri/DiPlay), CarPlay for compatible BYD Android head units, with the receiver added. Everything below the Android Auto section describes DiPlay itself.
 
-[Download & website](https://shihabal3amri.github.io/DiPlay/) · [Release](https://github.com/shihabal3amri/DiPlay/releases/tag/v0.2.15) · [Report a problem](https://github.com/shihabal3amri/DiPlay/issues/new/choose)
+> **Android Auto status:** experimental and **not yet tested with a real phone or in a car**. It is off by default, and it needs a head-unit identity file that this repository does not and cannot include. Read [docs/ANDROID_AUTO.md](docs/ANDROID_AUTO.md) before using it.
+
+> **BYD support scope:** DiPlay focuses on BYD cars. It may work on other brands, but other brands are unsupported and there are no plans to add support or fix brand-specific incompatibilities.
+
+[Android Auto guide](docs/ANDROID_AUTO.md) · [Report a problem with this repository](https://github.com/saz-io/AAtoAndroid-display/issues) · Upstream DiPlay: [download & website](https://shihabal3amri.github.io/DiPlay/) · [release](https://github.com/shihabal3amri/DiPlay/releases/tag/v0.2.15) · [issues](https://github.com/shihabal3amri/DiPlay/issues/new/choose)
 
 ![DiPlay home](site/assets/home.png)
 
-## 0.2.15 — public preview
+## Android Auto (experimental)
+
+- Wireless only: the phone finds DiPlay's Bluetooth service, joins the Wi-Fi network DiPlay creates, then connects over TCP with TLS.
+- Video (H.264, up to 1080p at 30 or 60 fps), media, navigation and system audio, the car microphone, multi-touch and media keys.
+- Uses the Wi-Fi mode you already chose for wireless CarPlay. Android Auto and CarPlay cannot run at the same time.
+- Found under **Settings → Advanced → Android Auto (experimental)**, off by default.
+- Driving status is always sent as restricted, because the car's speed is not read yet.
+- Not included: wired USB, turn-by-turn data for the BYD cluster, media and phone metadata.
+- The phone only accepts a head-unit TLS identity it recognises. DiPlay does not ship one; you import your own `headunit.pem` (see the guide).
+
+Automated tests run the protocol against a scripted fake phone with real TLS. They do not show that a real phone accepts DiPlay. The guide lists the known risks.
+
+## DiPlay 0.2.15 — public preview (upstream)
 
 Install on the **car**, not the iPhone. No jailbreak, dongle, Mac, account or authentication server is required for use. Core CarPlay does not require ADB; optional dashboard, battery, wheel-speed and parked-video features do. Your head unit must permit APK installation. The APK supports Android 7.1+ (API 25); Android 7.1–8.1 support is new and not yet confirmed on a vehicle. Wireless supports Wi-Fi Direct, the car’s existing hotspot or Existing Wi-Fi / Same LAN. Android 7.1–9 Wi-Fi Direct uses a firmware-dependent legacy path with generated group credentials and unverified requested frequency; see [Android 9 Wi-Fi Direct](docs/ANDROID9_WIFI_DIRECT.md). Android 10+ verifies its negotiated group frequency.
 
@@ -60,7 +76,9 @@ The app and release website are available in English, Arabic, Russian, Ukrainian
 
 Based on [xcertplay](https://github.com/shilapi/xcertplay), GPL-3.0. The home/settings UI and website adapt [DiAuto](https://github.com/shihabal3amri/DiAuto), AGPL-3.0; that license is included in `docs/licenses`. Preserve those notices when distributing modifications. CarPlay and its icon belong to Apple Inc.; no Apple or BYD affiliation or endorsement is implied.
 
-This repository starts with a clean public source snapshot. Local research, tester reports and release-signing secrets are excluded. The complete source corresponding to the APK is provided with every release; experimental runtime identity assets are described separately in the build instructions and notices.
+The Android Auto receiver was added by [@saz-io](https://github.com/saz-io). Its message layouts were read from the public protocol definitions in [OpenCarDev aasdk](https://github.com/opencardev/aasdk) (GPL-3.0); no code was copied from it. Android Auto is a trademark of Google LLC; no Google affiliation or endorsement is implied.
+
+This repository is a single-commit snapshot, so the commit history of the upstream projects is not included; see their repositories for it. It starts with a clean public source snapshot. Local research, tester reports and release-signing secrets are excluded. The complete source corresponding to the APK is provided with every release; experimental runtime identity assets are described separately in the build instructions and notices.
 
 ## Local release packaging
 
